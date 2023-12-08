@@ -1,14 +1,30 @@
+// Check if the browser object is defined
+var api = typeof browser !== "undefined" ? browser : chrome;
+
+// Function to create a table based on the provided data and table ID
 function createTable(data, tableId) {
   var table = document.getElementById(tableId);
-  var tbody = table.getElementsByTagName("tbody")[0];
+
+  if (!table) {
+    console.error("Table not found with ID:", tableId);
+    return;
+  }
+
+  var tbody = table.querySelector("tbody");
+
+  if (!tbody) {
+    console.error("Tbody not found inside table with ID:", tableId);
+    return;
+  }
+
   tbody.innerHTML = "";
 
-  for (var i = 0; i < data.length; i++) {
-    var gempaData = data[i];
+  data.forEach(function (gempaData, index) {
     var row = document.createElement("tr");
 
-    if (tableId === "latest-gempa-table") {
-      row.innerHTML = `
+    var tableContent =
+      tableId === "latest-gempa-table"
+        ? `
         <td>${gempaData.Tanggal || ""}</td>
         <td>${gempaData.Jam || ""}</td>
         <td>${gempaData.Lintang || ""}</td>
@@ -19,14 +35,17 @@ function createTable(data, tableId) {
         <td>${gempaData.Potensi || ""}</td>
         <td>${gempaData.Dirasakan || ""}</td>
         <td>
-          <img src="https://static.bmkg.go.id/${
+          <a href="https://static.bmkg.go.id/${
             gempaData.Shakemap || ""
-          }" alt="Shakemap" class="shakemap-img shakemap-thumbnail" data-toggle="modal" data-target="#shakemap-modal">
+          }" class="shakemap-thumbnail" data-fancybox="gallery" data-caption="Shakemap">
+            <img src="https://static.bmkg.go.id/${
+              gempaData.Shakemap || ""
+            }" alt="Shakemap" class="shakemap-img img-thumbnail">
+          </a>
         </td>
-      `;
-    } else {
-      row.innerHTML = `
-        <td>${i + 1}</td>
+      `
+        : `
+        <td>${index + 1}</td>
         <td>${gempaData.Tanggal || ""}</td>
         <td>${gempaData.Jam || ""}</td>
         <td>${gempaData.Lintang || ""}</td>
@@ -36,24 +55,26 @@ function createTable(data, tableId) {
         <td>${gempaData.Wilayah || ""}</td>
         <td>${gempaData.Potensi || ""}</td>
       `;
-    }
 
+    row.innerHTML = tableContent;
     tbody.appendChild(row);
-  }
+  });
 }
 
+// Function to update earthquake data based on URL
 function updateGempaData(url) {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
 
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status === 200) {
+  xhr.onload = function () {
+    if (xhr.status === 200) {
       var parser = new DOMParser();
       var xml = parser.parseFromString(xhr.responseText, "application/xml");
       var infogempa = xml.querySelector("Infogempa");
+
       if (infogempa) {
         var gempaData = Array.from(infogempa.querySelectorAll("gempa"));
-        var formattedData = gempaData.map(function (item, index) {
+        var formattedData = gempaData.map(function (item) {
           return {
             Tanggal: item.querySelector("Tanggal")
               ? item.querySelector("Tanggal").textContent
@@ -88,37 +109,62 @@ function updateGempaData(url) {
           };
         });
 
-        // Derive the table name based on the URL
         var tableName = url.includes("autogempa")
           ? "latest-gempa-table"
           : "gempa-table";
-
         createTable(formattedData, tableName);
       }
+    } else {
+      console.error("Error fetching data. Status code: " + xhr.status);
     }
   };
 
   xhr.send();
 }
 
+// Function to get earthquake information
 function getGempaInfo() {
   updateGempaData("https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.xml");
 }
 
+// Function to get the latest earthquake information automatically every 5 minutes
 function getLatestGempaInfo() {
   updateGempaData("https://data.bmkg.go.id/DataMKG/TEWS/autogempa.xml");
 }
 
-// Periodically update the latest earthquake data every 5 minutes (300,000 milliseconds)
-setInterval(function () {
-  getLatestGempaInfo();
-}, 300000);
+// Set intervals for calling functions
+setInterval(getLatestGempaInfo, 300000);
+setInterval(getGempaInfo, 900000);
 
-// Periodically update the earthquake data above M 5.0+ every 15 minutes (900,000 milliseconds)
-setInterval(function () {
+// Event listener when DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
   getGempaInfo();
-}, 900000);
+  getLatestGempaInfo();
 
-// Initial data retrieval on page load
-getGempaInfo();
-getLatestGempaInfo();
+  // Fancybox initialization using jQuery
+  $(".shakemap-thumbnail").fancybox({
+    loop: true,
+    buttons: ["slideShow", "fullScreen", "thumbs", "close"],
+    animationEffect: "fade",
+    transitionEffect: "slide",
+    thumbs: {
+      autoStart: true,
+      hideOnClose: true,
+    },
+    caption: function (instance, item) {
+      return (
+        item.opts.caption +
+        " - Image " +
+        (instance.index + 1) +
+        " of " +
+        instance.group.length
+      );
+    },
+  });
+
+  // Trigger fancybox on click
+  $(".shakemap-thumbnail").on("click", function () {
+    var index = $(".shakemap-thumbnail").index(this);
+    $(".shakemap-thumbnail").eq(index).trigger("click");
+  });
+});
