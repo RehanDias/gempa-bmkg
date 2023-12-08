@@ -1,48 +1,33 @@
-/* Default styles for larger screens (desktops) */
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 20px;
-  overflow-x: hidden; /* Tambahkan ini untuk menghindari geser horizontal */
+  font-family: "Inter", sans-serif;
+  font-family: "Roboto Slab", serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-h1 {
-  margin-top: 0;
+.container {
+  margin-top: 30px;
+  flex-grow: 1;
 }
 
-#latest-gempa-table {
+.table th,
+.table td {
+  padding: 15px;
+  text-align: left;
   font-size: 16px;
 }
 
-#latest-gempa-table td {
-  vertical-align: top;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #000;
-  margin-bottom: 20px;
-}
-
-table thead {
-  background-color: #333;
+.table th {
+  background-color: #007bff;
   color: #fff;
 }
 
-table th,
-table td {
-  padding: 8px;
-  border: 1px solid #000;
-  text-align: center;
-}
-
-table tbody tr:nth-child(odd) {
+.table tbody tr:nth-child(odd) {
   background-color: #f2f2f2;
-}
-
-table tbody tr:hover {
-  background-color: #ccc;
 }
 
 .shakemap-thumbnail {
@@ -50,23 +35,30 @@ table tbody tr:hover {
   height: auto;
 }
 
-/* Responsive styles for smaller screens (e.g., mobile phones and tablets) */
-@media screen and (max-width: 768px) {
-  body {
-    margin: 10px;
-    text-align: center;
-  }
+.footer {
+  background-color: #343a40;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  font-family: "Inter", sans-serif;
+}
 
-  #latest-gempa-table {
+/* Responsive styles */
+@media (max-width: 768px) {
+  .table th,
+  .table td {
+    padding: 10px;
     font-size: 14px;
   }
 
-  table {
-    margin-bottom: 10px;
+  .footer {
+    padding: 10px 15px;
+    font-size: 14px;
+    margin-top: 15px;
   }
 
-  table th,
-  table td {
-    padding: 4px;
+  /* Remove horizontal scrollbar for small screens */
+  .table {
+    overflow-x: hidden;
   }
 }
