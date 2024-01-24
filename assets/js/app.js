@@ -25,36 +25,36 @@ function createTable(data, tableId) {
     var tableContent =
       tableId === "latest-gempa-table"
         ? `
-        <td>${gempaData.Tanggal || ""}</td>
-        <td>${gempaData.Jam || ""}</td>
-        <td>${gempaData.Lintang || ""}</td>
-        <td>${gempaData.Bujur || ""}</td>
-        <td>${gempaData.Magnitude || ""}</td>
-        <td>${gempaData.Kedalaman || ""}</td>
-        <td>${gempaData.Wilayah || ""}</td>
-        <td>${gempaData.Potensi || ""}</td>
-        <td>${gempaData.Dirasakan || ""}</td>
-        <td>
-          <a href="https://static.bmkg.go.id/${
-            gempaData.Shakemap || ""
-          }" class="shakemap-thumbnail" data-fancybox="gallery" data-caption="Shakemap">
-            <img src="https://static.bmkg.go.id/${
-              gempaData.Shakemap || ""
-            }" alt="Shakemap" class="shakemap-img img-thumbnail">
-          </a>
-        </td>
-      `
+            <td>${gempaData.Tanggal || ""}</td>
+            <td>${gempaData.Jam || ""}</td>
+            <td>${gempaData.Lintang || ""}</td>
+            <td>${gempaData.Bujur || ""}</td>
+            <td>${gempaData.Magnitude || ""}</td>
+            <td>${gempaData.Kedalaman || ""}</td>
+            <td>${gempaData.Wilayah || ""}</td>
+            <td>${gempaData.Potensi || ""}</td>
+            <td>${gempaData.Dirasakan || ""}</td>
+            <td>
+                <a href="https://static.bmkg.go.id/${
+                  gempaData.Shakemap || ""
+                }" class="shakemap-thumbnail" data-fancybox="gallery" data-caption="Shakemap">
+                    <img src="https://static.bmkg.go.id/${
+                      gempaData.Shakemap || ""
+                    }" alt="Shakemap" class="shakemap-img img-thumbnail">
+                </a>
+            </td>
+        `
         : `
-        <td>${index + 1}</td>
-        <td>${gempaData.Tanggal || ""}</td>
-        <td>${gempaData.Jam || ""}</td>
-        <td>${gempaData.Lintang || ""}</td>
-        <td>${gempaData.Bujur || ""}</td>
-        <td>${gempaData.Magnitude || ""}</td>
-        <td>${gempaData.Kedalaman || ""}</td>
-        <td>${gempaData.Wilayah || ""}</td>
-        <td>${gempaData.Potensi || ""}</td>
-      `;
+            <td>${index + 1}</td>
+            <td>${gempaData.Tanggal || ""}</td>
+            <td>${gempaData.Jam || ""}</td>
+            <td>${gempaData.Lintang || ""}</td>
+            <td>${gempaData.Bujur || ""}</td>
+            <td>${gempaData.Magnitude || ""}</td>
+            <td>${gempaData.Kedalaman || ""}</td>
+            <td>${gempaData.Wilayah || ""}</td>
+            <td>${gempaData.Potensi || ""}</td>
+        `;
 
     row.innerHTML = tableContent;
     tbody.appendChild(row);

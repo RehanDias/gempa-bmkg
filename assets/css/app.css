@@ -1,6 +1,6 @@
+/* General Styles for the Body */
 body {
-  font-family: "Inter", sans-serif;
-  font-family: "Roboto Slab", serif;
+  font-family: "Inter", "Roboto Slab", sans-serif;
   line-height: 1.6;
   background-color: #f8f9fa;
   margin: 0;
@@ -9,56 +9,119 @@ body {
   min-height: 100vh;
 }
 
+/* Container Styles */
 .container {
   margin-top: 30px;
   flex-grow: 1;
 }
 
-.table th,
-.table td {
-  padding: 15px;
-  text-align: left;
-  font-size: 16px;
+/* Heading Styles */
+h1 {
+  font-weight: bold;
 }
 
+/* Heading Styles with Icon */
+h1 .bi {
+  margin-right: 10px;
+}
+
+/* Heading Styles for Latest Earthquake Information Section */
+.latest-gempa h1 {
+  color: #007bff;
+  font-size: 24px;
+  font-family: "Roboto Slab", sans-serif;
+}
+
+/* Heading Styles for 15 Earthquakes M 5.0+ Section */
+.gempa-15 h1 {
+  color: #dc3545;
+  font-size: 24px;
+  font-family: "Roboto Slab", sans-serif;
+}
+
+/* Table Header Styles */
 .table th {
   background-color: #007bff;
   color: #fff;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Table Row Styles for Odd Rows */
 .table tbody tr:nth-child(odd) {
-  background-color: #f2f2f2;
+  background-color: #edf2f7;
 }
 
-.shakemap-thumbnail {
-  max-width: 100%;
-  height: auto;
-}
-
-.footer {
-  background-color: #343a40;
-  color: #fff;
+/* Table Cell Styles */
+.table th,
+.table td {
+  padding: 15px;
   text-align: center;
-  padding: 20px 0;
-  font-family: "Inter", sans-serif;
+  font-size: 16px;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
+/* Shakemap Thumbnail Styles */
+.shakemap-thumbnail {
+  max-width: 150px;
+  height: auto;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Shakemap Thumbnail Hover Effect */
+.shakemap-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #f8f9fa;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 20px 0;
+}
+
+/* Container Styles within Footer */
+.footer .container {
+  text-align: center;
+}
+
+/* Footer Text Styles */
+.footer span {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Responsive Styles for Small Screens (max-width: 576px) */
+@media (max-width: 576px) {
+  h1 {
+    font-size: 22px;
+  }
+
   .table th,
   .table td {
-    padding: 10px;
+    padding: 12px;
     font-size: 14px;
   }
 
   .footer {
-    padding: 10px 15px;
-    font-size: 14px;
-    margin-top: 15px;
+    padding: 15px 0;
   }
 
-  /* Remove horizontal scrollbar for small screens */
+  .footer span {
+    font-size: 12px;
+  }
+
+  /* Horizontal Scroll for Small Screens */
   .table {
-    overflow-x: hidden;
+    overflow-x: auto;
+  }
+
+  /* Responsive Shakemap Thumbnail Styles */
+  .shakemap-thumbnail {
+    max-width: 100%;
   }
 }

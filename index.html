@@ -1,78 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Document Head Section -->
     <meta charset="UTF-8" />
-    <title>Informasi Gempa BMKG</title>
+    <title>BMKG Earthquake Information</title>
+
+    <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
+
+    <!-- Fancybox CSS -->
     <link
       rel="stylesheet"
       type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css"
     />
+
+    <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Fancybox JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Roboto+Slab&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="./assets/css/app.css" />
   </head>
-  <body>
-    <div class="container mt-4">
-      <h1><i class="bi bi-info-circle"></i> Informasi Gempa Terbaru</h1>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm" id="latest-gempa-table">
-          <thead>
-            <tr>
-              <th>Tanggal</th>
-              <th>Jam</th>
-              <th>Lintang</th>
-              <th>Bujur</th>
-              <th>Magnitude</th>
-              <th>Kedalaman</th>
-              <th>Wilayah</th>
-              <th>Potensi</th>
-              <th>Dirasakan</th>
-              <th>Shakemap</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
 
-      <h1><i class="bi bi-list-ol"></i> Informasi 15 Gempa M 5.0+</h1>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm" id="gempa-table">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>Tanggal</th>
-              <th>Jam</th>
-              <th>Lintang</th>
-              <th>Bujur</th>
-              <th>Magnitude</th>
-              <th>Kedalaman</th>
-              <th>Wilayah</th>
-              <th>Potensi</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+  <body>
+    <!-- Main Content Section -->
+    <div class="container mt-4">
+      <!-- Latest Earthquake Information Section -->
+      <section class="latest-gempa">
+        <h1><i class="bi bi-info-circle"></i> Latest Earthquake Information</h1>
+        <div class="table-responsive">
+          <!-- Table for Latest Earthquake Information -->
+          <table class="table table-striped table-sm" id="latest-gempa-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Magnitude</th>
+                <th>Depth</th>
+                <th>Region</th>
+                <th>Potential</th>
+                <th>Felt</th>
+                <th>Shakemap</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Information on 15 Earthquakes with Magnitude 5.0+ Section -->
+      <section class="gempa-15">
+        <h1>
+          <i class="bi bi-list-ol"></i> Information on 15 Earthquakes M 5.0+
+        </h1>
+        <div class="table-responsive">
+          <!-- Table for 15 Earthquakes M 5.0+ Information -->
+          <table class="table table-striped table-sm" id="gempa-table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Magnitude</th>
+                <th>Depth</th>
+                <th>Region</th>
+                <th>Potential</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
     </div>
 
-    <footer class="footer mt-auto py-3 bg-dark text-white text-center">
+    <!-- Footer Section -->
+    <footer class="footer mt-auto py-3">
       <div class="container">
-        <p>&copy; 2023 Badan Meteorologi, Klimatologi, dan Geofisika (BMKG)</p>
+        <span class="text-muted"
+          >&copy; 2024 Meteorology, Climatology, and Geophysics Agency
+          (BMKG)</span
+        >
       </div>
     </footer>
 
+    <!-- Custom JavaScript -->
     <script src="./assets/js/app.js"></script>
   </body>
 </html>
